@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emak Crate - PICO-8 Puzzle Platformer</title>
+    <meta name="description" content="Emak Crate - A challenging crate-chucking puzzle platformer made with PICO-8. Play now!">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-color: #f59e0b; /* Amber */
+            --accent-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --font-family: 'Outfit', sans-serif;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.025em;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Language Toggle Button */
+        .lang-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-title span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: 0 10px 20px -10px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -10px rgba(245, 158, 11, 0.7);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Interactive Showcase */
+        .showcase {
+            margin-top: 2rem;
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .showcase-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .showcase-slide {
+            min-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .showcase-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Slider navigation */
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 8px 16px;
+            border-radius: 9999px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Information Grid */
+        .info-section {
+            padding: 6rem 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            width: fit-content;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .card-content {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            flex-grow: 1;
+        }
+
+        /* Highlight Card Styling */
+        .card-highlight {
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(245, 158, 11, 0.05) 100%);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.75rem;
+            }
+            .hero {
+                padding: 4rem 0 2rem;
+            }
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .btn {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="logo">
+                <img src="icon/48.png" alt="Emak Crate Logo">
+                <span>Emak Crate</span>
+            </div>
+            <button class="lang-btn" id="langToggle">
+                <i class="fa-solid fa-globe"></i>
+                <span id="langText">Bahasa Indonesia</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero fade-in">
+            <h1 class="hero-title" id="heroTitle">Crate Chucking <span>Puzzle Platformer</span></h1>
+            <p class="hero-subtitle" id="heroSubtitle">Help Emak navigate challenging levels by throwing crates, dodging obstacles, and solving clever puzzles. Made beautifully in retro PICO-8 style.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://harmonymonroe.itch.io/pico-crate" target="_blank" class="btn btn-primary" id="btnPlay">
+                    <i class="fa-solid fa-play"></i> Play on Itch.io
+                </a>
+                <a href="https://github.com/sekarihikari/emakcrate" class="btn btn-secondary" id="btnCode">
+                    <i class="fa-brands fa-github"></i> View Source Code
+                </a>
+            </div>
+
+            <!-- Screenshot Showcase Carousel -->
+            <div class="showcase">
+                <div class="showcase-slider" id="slider">
+                    <div class="showcase-slide"><img src="screens/1.png" alt="Emak Crate Screenshot 1"></div>
+                    <div class="showcase-slide"><img src="screens/2.png" alt="Emak Crate Screenshot 2"></div>
+                    <div class="showcase-slide"><img src="screens/3.png" alt="Emak Crate Screenshot 3"></div>
+                    <div class="showcase-slide"><img src="screens/4.png" alt="Emak Crate Screenshot 4"></div>
+                    <div class="showcase-slide"><img src="screens/5.png" alt="Emak Crate Screenshot 5"></div>
+                    <div class="showcase-slide"><img src="screens/6.png" alt="Emak Crate Screenshot 6"></div>
+                    <div class="showcase-slide"><img src="screens/7.png" alt="Emak Crate Screenshot 7"></div>
+                    <div class="showcase-slide"><img src="screens/8.png" alt="Emak Crate Screenshot 8"></div>
+                </div>
+                <div class="slider-nav" id="sliderNav"></div>
+            </div>
+        </section>
+
+        <!-- Information Cards Section -->
+        <section class="info-section">
+            <div class="info-grid">
+                <!-- Age Policy Card -->
+                <div class="card card-highlight">
+                    <div class="card-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <h2 class="card-title" id="ageTitle">Age Rating 13+</h2>
+                    <p class="card-content" id="ageContent">Emak Crate is designed for users aged 13 and older. The game contains moderately challenging puzzle elements that are best enjoyed by players who are 13 years of age or older.</p>
+                </div>
+
+                <!-- Privacy Policy Card -->
+                <div class="card card-highlight">
+                    <div class="card-icon"><i class="fa-solid fa-lock"></i></div>
+                    <h2 class="card-title" id="privacyTitle">Absolute Privacy</h2>
+                    <p class="card-content" id="privacyContent">Your privacy is highly valued. The Emak Crate application operates entirely offline and does not collect, store, or share any personal data, analytics, or device information.</p>
+                </div>
+
+                <!-- Retro Engine Card -->
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <h2 class="card-title" id="retroTitle">PICO-8 Engine</h2>
+                    <p class="card-content" id="retroContent">Built on the PICO-8 fantasy console, featuring custom level designs made with Tiled, and packaged with Flutter for a smooth mobile experience.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Sekai Hikari. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Multilingual Translation Resources
+        const translations = {
+            en: {
+                langText: "Bahasa Indonesia",
+                heroTitle: "Crate Chucking <span>Puzzle Platformer</span>",
+                heroSubtitle: "Help Emak navigate challenging levels by throwing crates, dodging obstacles, and solving clever puzzles. Made beautifully in retro PICO-8 style.",
+                btnPlay: '<i class="fa-solid fa-play"></i> Play on Itch.io',
+                btnCode: '<i class="fa-brands fa-github"></i> View Source Code',
+                ageTitle: "Age Rating 13+",
+                ageContent: "Emak Crate is designed for users aged 13 and older. The game contains moderately challenging puzzle elements that are best enjoyed by players who are 13 years of age or older.",
+                privacyTitle: "Absolute Privacy",
+                privacyContent: "Your privacy is highly valued. The Emak Crate application operates entirely offline and does not collect, store, or share any personal data, analytics, or device information.",
+                retroTitle: "PICO-8 Engine",
+                retroContent: "Built on the PICO-8 fantasy console, featuring custom level designs made with Tiled, and packaged with Flutter for a smooth mobile experience."
+            },
+            id: {
+                langText: "English",
+                heroTitle: "Game Puzzle Platformer <span>Lempar Kotak</span>",
+                heroSubtitle: "Bantu Emak melewati level-level menantang dengan melempar kotak, menghindari rintangan, dan memecahkan teka-teki cerdas. Dibuat dengan gaya retro PICO-8 yang indah.",
+                btnPlay: '<i class="fa-solid fa-play"></i> Mainkan di Itch.io',
+                btnCode: '<i class="fa-brands fa-github"></i> Lihat Source Code',
+                ageTitle: "Batasan Usia 13 Tahun Keatas",
+                ageContent: "Emak Crate dirancang untuk pengguna berusia 13 tahun ke atas. Game ini berisi elemen teka-teki yang cukup menantang yang paling cocok dinikmati oleh pemain berusia 13 tahun ke atas.",
+                privacyTitle: "Privasi Mutlak",
+                privacyContent: "Privasi Anda sangat kami hargai. Aplikasi Emak Crate berjalan sepenuhnya secara offline dan tidak mengumpulkan, menyimpan, atau membagikan data pribadi, analitik, atau informasi perangkat apa pun.",
+                retroTitle: "Engine PICO-8",
+                retroContent: "Dibuat di atas konsol fantasi PICO-8, menampilkan desain level kustom yang dibuat dengan Tiled, dan dibungkus menggunakan Flutter untuk pengalaman mobile yang lancar."
+            }
+        };
+
+        let currentLang = 'en';
+
+        const langToggleBtn = document.getElementById('langToggle');
+        const langText = document.getElementById('langText');
+        const heroTitle = document.getElementById('heroTitle');
+        const heroSubtitle = document.getElementById('heroSubtitle');
+        const btnPlay = document.getElementById('btnPlay');
+        const btnCode = document.getElementById('btnCode');
+        const ageTitle = document.getElementById('ageTitle');
+        const ageContent = document.getElementById('ageContent');
+        const privacyTitle = document.getElementById('privacyTitle');
+        const privacyContent = document.getElementById('privacyContent');
+        const retroTitle = document.getElementById('retroTitle');
+        const retroContent = document.getElementById('retroContent');
+
+        function updateLanguage(lang) {
+            langText.textContent = translations[lang].langText;
+            heroTitle.innerHTML = translations[lang].heroTitle;
+            heroSubtitle.textContent = translations[lang].heroSubtitle;
+            btnPlay.innerHTML = translations[lang].btnPlay;
+            btnCode.innerHTML = translations[lang].btnCode;
+            ageTitle.textContent = translations[lang].ageTitle;
+            ageContent.textContent = translations[lang].ageContent;
+            privacyTitle.textContent = translations[lang].privacyTitle;
+            privacyContent.textContent = translations[lang].privacyContent;
+            retroTitle.textContent = translations[lang].retroTitle;
+            retroContent.textContent = translations[lang].retroContent;
+        }
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'id' : 'en';
+            updateLanguage(currentLang);
+        });
+
+        // Initialize default language (detect browser language)
+        const browserLang = navigator.language.startsWith('id') ? 'id' : 'en';
+        currentLang = browserLang;
+        updateLanguage(currentLang);
+
+        // Carousel Slider Logic
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.showcase-slide');
+        const sliderNav = document.getElementById('sliderNav');
+        let currentSlideIndex = 0;
+        let slideInterval;
+
+        // Create dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('slider-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            sliderNav.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlideIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSlider();
+            resetInterval();
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            updateSlider();
+        }
+
+        function startInterval() {
+            slideInterval = setInterval(nextSlide, 3500);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval();
+        }
+
+        // Start auto-slider
+        startInterval();
+    </script>
+</body>
+</html>
