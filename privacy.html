@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Emak Crate</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-color: #f59e0b; /* Amber */
+            --accent-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --font-family: 'Outfit', sans-serif;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        /* Language Toggle Button */
+        .lang-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Content Section */
+        .content {
+            padding: 4rem 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .meta-date {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 3rem;
+            display: block;
+        }
+
+        /* Policy Card / Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(245, 158, 11, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .highlight-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style-position: inside;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            font-weight: 300;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span id="backToHome">Back to Home</span>
+            </a>
+            <button class="lang-btn" id="langToggle">
+                <i class="fa-solid fa-globe"></i>
+                <span id="langText">Bahasa Indonesia</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container content">
+        <h1 class="page-title" id="pageTitle">Privacy Policy</h1>
+        <span class="meta-date" id="lastUpdated">Last Updated: July 17, 2026</span>
+
+        <!-- Emphasized Summary Box -->
+        <div class="highlight-box">
+            <div class="highlight-title">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span id="summaryTitle">Zero Data Collection & Age Limitation</span>
+            </div>
+            <p style="margin-bottom: 0;" id="summaryContent">The Emak Crate application is built with complete privacy in mind. We do not collect, store, or share any personal information. The app is rated for ages 13 and older.</p>
+        </div>
+
+        <!-- Section 1 -->
+        <section>
+            <h2 id="sec1Title">1. Introduction</h2>
+            <p id="sec1Content">Welcome to Emak Crate. We respect your privacy and are committed to protecting it. This Privacy Policy describes how we handle information in connection with our mobile application.</p>
+        </section>
+
+        <!-- Section 2 -->
+        <section>
+            <h2 id="sec2Title">2. Age Limit (Ages 13+)</h2>
+            <p id="sec2Content">Our application is intended for users who are at least 13 years of age or older. We do not knowingly target or collect information from children under 13.</p>
+        </section>
+
+        <!-- Section 3 -->
+        <section>
+            <h2 id="sec3Title">3. Data Collection and Usage</h2>
+            <p id="sec3Content1">We do not collect any personal data, usage statistics, analytics, or device identifiers. The application operates entirely offline on your mobile device. Because of this:</p>
+            <ul>
+                <li id="li1">No data is sent to external servers.</li>
+                <li id="li2">No third-party trackers or advertisements are embedded in the app.</li>
+                <li id="li3">No account registration is required to play.</li>
+            </ul>
+        </section>
+
+        <!-- Section 4 -->
+        <section>
+            <h2 id="sec4Title">4. Changes to This Privacy Policy</h2>
+            <p id="sec4Content">We may update our Privacy Policy from time to time. You are advised to review this page periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+        </section>
+
+        <!-- Section 5 -->
+        <section>
+            <h2 id="sec5Title">5. Contact Us</h2>
+            <p id="sec5Content">If you have any questions or suggestions about this Privacy Policy, do not hesitate to contact us at: <a href="mailto:sekarihikari@gmail.com">sekarihikari@gmail.com</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Sekai Hikari. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Multilingual Translation Resources
+        const translations = {
+            en: {
+                langText: "Bahasa Indonesia",
+                backToHome: "Back to Home",
+                pageTitle: "Privacy Policy",
+                lastUpdated: "Last Updated: July 17, 2026",
+                summaryTitle: "Zero Data Collection & Age Limitation",
+                summaryContent: "The Emak Crate application is built with complete privacy in mind. We do not collect, store, or share any personal information. The app is rated for ages 13 and older.",
+                sec1Title: "1. Introduction",
+                sec1Content: "Welcome to Emak Crate. We respect your privacy and are committed to protecting it. This Privacy Policy describes how we handle information in connection with our mobile application.",
+                sec2Title: "2. Age Limit (Ages 13+)",
+                sec2Content: "Our application is intended for users who are at least 13 years of age or older. We do not knowingly target or collect information from children under 13.",
+                sec3Title: "3. Data Collection and Usage",
+                sec3Content1: "We do not collect any personal data, usage statistics, analytics, or device identifiers. The application operates entirely offline on your mobile device. Because of this:",
+                li1: "No data is sent to external servers.",
+                li2: "No third-party trackers or advertisements are embedded in the app.",
+                li3: "No account registration is required to play.",
+                sec4Title: "4. Changes to This Privacy Policy",
+                sec4Content: "We may update our Privacy Policy from time to time. You are advised to review this page periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.",
+                sec5Title: "5. Contact Us",
+                sec5Content: "If you have any questions or suggestions about this Privacy Policy, do not hesitate to contact us at: <a href=\"mailto:sekarihikari@gmail.com\">sekarihikari@gmail.com</a>."
+            },
+            id: {
+                langText: "English",
+                backToHome: "Kembali ke Beranda",
+                pageTitle: "Kebijakan Privasi",
+                lastUpdated: "Terakhir Diperbarui: 17 Juli 2026",
+                summaryTitle: "Tanpa Pengumpulan Data & Batasan Usia",
+                summaryContent: "Aplikasi Emak Crate dibangun dengan mengedepankan privasi mutlak. Kami tidak mengumpulkan, menyimpan, atau membagikan informasi pribadi apa pun. Aplikasi ini ditujukan untuk usia 13 tahun ke atas.",
+                sec1Title: "1. Pendahuluan",
+                sec1Content: "Selamat datang di Emak Crate. Kami menghormati privasi Anda dan berkomitmen untuk melindunginya. Kebijakan Privasi ini menjelaskan bagaimana kami menangani informasi sehubungan dengan aplikasi seluler kami.",
+                sec2Title: "2. Batasan Usia (Usia 13+)",
+                sec2Content: "Aplikasi kami ditujukan untuk pengguna yang berusia setidaknya 13 tahun ke atas. Kami tidak dengan sengaja menargetkan atau mengumpulkan informasi dari anak-anak di bawah usia 13 tahun.",
+                sec3Title: "3. Pengumpulan dan Penggunaan Data",
+                sec3Content1: "Kami tidak mengumpulkan data pribadi, statistik penggunaan, analitik, atau pengidentifikasi perangkat apa pun. Aplikasi ini berjalan sepenuhnya secara offline di perangkat seluler Anda. Oleh karena itu:",
+                li1: "Tidak ada data yang dikirimkan ke server eksternal.",
+                li2: "Tidak ada pelacak pihak ketiga atau iklan yang disematkan dalam aplikasi.",
+                li3: "Tidak diperlukan pendaftaran akun untuk bermain.",
+                sec4Title: "4. Perubahan Kebijakan Privasi Ini",
+                sec4Content: "Kami dapat memperbarui Kebijakan Privasi kami dari waktu ke waktu. Anda disarankan untuk meninjau halaman ini secara berkala untuk setiap perubahan. Perubahan pada Kebijakan Privasi ini berlaku efektif saat diposting di halaman ini.",
+                sec5Title: "5. Hubungi Kami",
+                sec5Content: "Jika Anda memiliki pertanyaan atau saran tentang Kebijakan Privasi ini, jangan ragu untuk menghubungi kami di: <a href=\"mailto:sekarihikari@gmail.com\">sekarihikari@gmail.com</a>."
+            }
+        };
+
+        let currentLang = 'en';
+
+        const langToggleBtn = document.getElementById('langToggle');
+        const langText = document.getElementById('langText');
+        const backToHome = document.getElementById('backToHome');
+        const pageTitle = document.getElementById('pageTitle');
+        const lastUpdated = document.getElementById('lastUpdated');
+        const summaryTitle = document.getElementById('summaryTitle');
+        const summaryContent = document.getElementById('summaryContent');
+        const sec1Title = document.getElementById('sec1Title');
+        const sec1Content = document.getElementById('sec1Content');
+        const sec2Title = document.getElementById('sec2Title');
+        const sec2Content = document.getElementById('sec2Content');
+        const sec3Title = document.getElementById('sec3Title');
+        const sec3Content1 = document.getElementById('sec3Content1');
+        const li1 = document.getElementById('li1');
+        const li2 = document.getElementById('li2');
+        const li3 = document.getElementById('li3');
+        const sec4Title = document.getElementById('sec4Title');
+        const sec4Content = document.getElementById('sec4Content');
+        const sec5Title = document.getElementById('sec5Title');
+        const sec5Content = document.getElementById('sec5Content');
+
+        function updateLanguage(lang) {
+            langText.textContent = translations[lang].langText;
+            backToHome.textContent = translations[lang].backToHome;
+            pageTitle.textContent = translations[lang].pageTitle;
+            lastUpdated.textContent = translations[lang].lastUpdated;
+            summaryTitle.textContent = translations[lang].summaryTitle;
+            summaryContent.textContent = translations[lang].summaryContent;
+            sec1Title.textContent = translations[lang].sec1Title;
+            sec1Content.textContent = translations[lang].sec1Content;
+            sec2Title.textContent = translations[lang].sec2Title;
+            sec2Content.textContent = translations[lang].sec2Content;
+            sec3Title.textContent = translations[lang].sec3Title;
+            sec3Content1.textContent = translations[lang].sec3Content1;
+            li1.textContent = translations[lang].li1;
+            li2.textContent = translations[lang].li2;
+            li3.textContent = translations[lang].li3;
+            sec4Title.textContent = translations[lang].sec4Title;
+            sec4Content.textContent = translations[lang].sec4Content;
+            sec5Title.textContent = translations[lang].sec5Title;
+            sec5Content.innerHTML = translations[lang].sec5Content;
+        }
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'id' : 'en';
+            updateLanguage(currentLang);
+        });
+
+        // Initialize default language (detect browser language)
+        const browserLang = navigator.language.startsWith('id') ? 'id' : 'en';
+        currentLang = browserLang;
+        updateLanguage(currentLang);
+    </script>
+</body>
+</html>
